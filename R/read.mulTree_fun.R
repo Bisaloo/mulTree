@@ -3,7 +3,7 @@ get.mulTree.model <- function(mcmc.file) {
     model <- get(load(mcmc.file))
     ## Testing if the mcmc.file is the right object class
     if(class(model) != "MCMCglmm") {
-        stop(paste("No MCMCglmm model found in file", mcmc.file))
+        stop("No MCMCglmm model found in file ", mcmc.file)
     }
     return(model)
 }

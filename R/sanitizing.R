@@ -12,9 +12,9 @@ check.class <- function(object, class, msg, errorif = FALSE) {
     ## Set msg if missing
     if(missing(msg)) {
         if(length_class != 1) {
-            msg <- paste(" must be of class ", paste(class, collapse = " or "), ".", sep = "")
+            msg <- paste0(" must be of class ", paste(class, collapse = " or "), ".")
         } else {
-            msg <- paste(" must be of class ", class, ".", sep = "")
+            msg <- paste0(" must be of class ", class, ".")
         }
     }
 

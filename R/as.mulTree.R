@@ -74,21 +74,21 @@ as.mulTree <- function(data, tree, taxa, rand.terms, clean.data = FALSE) {
         if (class(taxa) == "character") {
             taxa.column.num = FALSE
         } else {
-            stop(paste(as.expression(match_call$taxa)," not found in ", as.expression(match_call$data), sep = ""), call. = FALSE)
+            stop(as.expression(match_call$taxa)," not found in ", as.expression(match_call$data), call. = FALSE)
         }
     }
 
     ## is provided column present in data?
     if(taxa.column.num == TRUE) {
         if(taxa > length(data)) {
-            stop(paste("taxa column not found in ", as.expression(match_call$data), sep = ""), call. = FALSE)
+            stop("taxa column not found in ", as.expression(match_call$data), call. = FALSE)
         } else {
             taxa = names(data)[taxa]
         }
     } else {
         taxa.names <- grep(taxa, names(data))
         if(length(taxa.names) == 0) {
-            stop(paste(as.expression(match_call$taxa)," not found in ", as.expression(match_call$data), ".", sep = ""), call. = FALSE)
+            stop(as.expression(match_call$taxa)," not found in ", as.expression(match_call$data), ".", call. = FALSE)
         }
     }
 
@@ -111,7 +111,7 @@ as.mulTree <- function(data, tree, taxa, rand.terms, clean.data = FALSE) {
 
             if(length(is_cor) != length(no_match)) {
                 ## At leas one wrong term anyway!
-                stop("The following random terms do not match with any column name provided in data:\n    ", paste(as.character(no_match), sep = ", "), ".", sep = "")
+                stop("The following random terms do not match with any column name provided in data:\n    ", paste(as.character(no_match), sep = ", "), ".")
             } else {
                 ## Check if the correlation terms exist
                 cor_term_tmp <- strsplit(no_match, split = ":")[[1]]
@@ -121,7 +121,7 @@ as.mulTree <- function(data, tree, taxa, rand.terms, clean.data = FALSE) {
 
                 if(any(is.na(cor_terms_list_match))) {
                     if(!any(cor_term[is.na(cor_terms_list_match)] %in% c("units", "trait"))) {
-                        stop("The following random terms do not match with any column name provided in data:\n    ", paste(cor_term[is.na(cor_terms_list_match)], sep = ", "), ".", sep = "")
+                        stop("The following random terms do not match with any column name provided in data:\n    ", paste(cor_term[is.na(cor_terms_list_match)], sep = ", "), ".")
                     }
                 }
             }
@@ -220,7 +220,7 @@ as.mulTree <- function(data, tree, taxa, rand.terms, clean.data = FALSE) {
     }
 
     ## Creating the mulTree object
-    taxa_column <- paste("renamed column ", taxa, " into 'sp.col'", sep = "")
+    taxa_column <- paste0("renamed column ", taxa, " into 'sp.col'")
     output <- list(phy = tree_new, data = data_new, random.terms = rand.terms, taxa.column = taxa_column)
     ## Assign class
     class(output) <- "mulTree"

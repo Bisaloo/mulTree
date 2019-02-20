@@ -44,13 +44,13 @@ plot.mulTree <- function(mulTree.summary, terms, cex.terms, cex.coeff, horizonta
     ## SANITIZING
     ## mulTree.results
     if(!all(class(mulTree.summary) == c("matrix","mulTree"))) {
-        stop(match_call$mulTree.summary, " is not mulTree matrix.\nUse summary.mulTree() to properly generate the data.", sep = "")   
+        stop(match_call$mulTree.summary, " is not mulTree matrix.\nUse summary.mulTree() to properly generate the data.")
     }
 
     ## terms
     if(!missing(terms)) {
         check.class(terms, "character")
-        check.length(terms, nrow(mulTree.summary), paste(" must have the same number of terms as ", match_call$mulTree.summary, sep = ""), errorif = FALSE)
+        check.length(terms, nrow(mulTree.summary), paste0(" must have the same number of terms as ", match_call$mulTree.summary), errorif = FALSE)
     } else {
         terms <- rownames(mulTree.summary)
     }

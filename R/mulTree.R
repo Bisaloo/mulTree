@@ -181,10 +181,10 @@ mulTree <- function(mulTree.data, formula, parameters, chains = 2, priors, ..., 
             matching <- split_terms %in% colnames(mulTree.data$data)
 
             if(any(!matching)) {
-                stop(paste(paste(formula_terms[which(!matching)], collapse = ", "), "terms in the formula do not match dataset column names."))
+                stop(paste(formula_terms[which(!matching)], collapse = ", "), " terms in the formula do not match dataset column names.")
             }
         } else {
-            stop(paste(paste(formula_terms[which(is.na(check_formula))], collapse = ", "), "terms in the formula do not match dataset column names."))
+            stop(paste(formula_terms[which(is.na(check_formula))], collapse = ", "), " terms in the formula do not match dataset column names.")
         }
     }
 
@@ -220,7 +220,7 @@ mulTree <- function(mulTree.data, formula, parameters, chains = 2, priors, ..., 
     check.length(output, 1, " must be a single chain of characters.")
     ## Check if the output chain name is already present in the current directory
     if(ask && length(grep(output, list.files())) > 0) {
-        read.key(paste("Output chain name \"", output, "\" already exists!\nPress [enter] if you wish to overwrite the models or [esc] to cancel.", sep = ""), "Models will be overwritten...")
+        read.key(paste0("Output chain name \"", output, "\" already exists!\nPress [enter] if you wish to overwrite the models or [esc] to cancel."), "Models will be overwritten...")
     }
 
     ## warn

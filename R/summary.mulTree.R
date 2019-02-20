@@ -63,7 +63,7 @@ summary.mulTree <- function(mulTree.results, prob = c(50, 95), use.hdr = TRUE, c
     ## check if the function properly outputs a single value
     try(test_cent.tend <- cent.tend(stats::rnorm(10)), silent = TRUE)
     if(length(test_cent.tend) != 1 & class(test_cent.tend) != "numeric") {
-        stop(paste(match_call$cent.tend, " cannot calculate a central tendency of a distribution."))
+        stop(match_call$cent.tend, " cannot calculate a central tendency of a distribution.")
     }
 
     ## use.hdr
@@ -79,11 +79,10 @@ summary.mulTree <- function(mulTree.results, prob = c(50, 95), use.hdr = TRUE, c
         mulTree_results <- try(mapply(lapply.hdr, mulTree.results, as.list(names(mulTree.results)), MoreArgs=list(prob, ...), SIMPLIFY=FALSE), silent = TRUE)
         #mulTree_results <- try(mapply(lapply.hdr, mulTree.results, as.list(names(mulTree.results)), MoreArgs=list(prob), SIMPLIFY=FALSE), silent = TRUE) ; warning("DEBUG MODE")
         if(class(mulTree_results) == "try-error") {
-            stop(paste("Impossible to calculate the HDR!\n",
+            stop("Impossible to calculate the HDR!\n",
                 "Try using the option 'use.hdr = FALSE' for calculating the quantiles instead.\n",
                 "'hdr' function gave the following error:\n",
-                mulTree_results[[1]],
-                sep = ""))
+                mulTree_results[[1]])
         }
     }
 

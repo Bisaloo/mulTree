@@ -58,11 +58,11 @@ read.mulTree <- function(mulTree.chain, convergence = FALSE, model = FALSE, extr
 ##     check.length(scanned_chains, 0, " files not found in current directory.", errorif = TRUE)
     if(length(scanned_chains) == 1) {
         if(length(grep("chain[0-9]+\\.rda$", scanned_chains)) == 0) {
-            stop("File \"", mulTree.chain, "\" is not a mulTree chain but a single file.", sep="",call.=FALSE)
+            stop("File \"", mulTree.chain, "\" is not a mulTree chain but a single file.",call.=FALSE)
         }
     } else {
         if(length(grep("chain[0-9]+\\.rda$", scanned_chains)) == 0) {
-            stop("File \"", mulTree.chain, "\" not found in current directory.", sep="",call.=FALSE)
+            stop("File \"", mulTree.chain, "\" not found in current directory.",call.=FALSE)
         }
     }
 
@@ -70,13 +70,13 @@ read.mulTree <- function(mulTree.chain, convergence = FALSE, model = FALSE, extr
     ## convergence
     check.class(convergence, 'logical')
     if(convergence == TRUE & length(scanned_chains) == 1) {
-        stop("The convergence file can't be loaded because \"", mulTree.chain, "\" is a single model.\n", sep="")
+        stop("The convergence file can't be loaded because \"", mulTree.chain, "\" is a single model.\n")
     }
 
     ## model
     check.class(model, 'logical')
     if(length(scanned_chains) > 1 & model == TRUE) {
-        stop("The MCMCglmm model can't be loaded because \"", mulTree.chain, "\" is a chain name.\nPlease specify the single model's name.", sep="")
+        stop("The MCMCglmm model can't be loaded because \"", mulTree.chain, "\" is a chain name.\nPlease specify the single model's name.")
     }
 
     ## extract
@@ -88,10 +88,10 @@ read.mulTree <- function(mulTree.chain, convergence = FALSE, model = FALSE, extr
     ## Extracting some specific elements from all the chains
     if(!is.null(extract)) {
         ##  Extract the testing model
-        test_model <- get.mulTree.model(paste(mulTree.chain, "-tree1_", "chain1.rda", sep=""))
+        test_model <- get.mulTree.model(paste0(mulTree.chain, "-tree1_", "chain1.rda"))
         ## checking if the required element exists
         if(any(is.na(match(extract, names(test_model))))) {
-            stop(paste(as.expression(match_call$extract), " element does not exist in any model.", sep=""))
+            stop(as.expression(match_call$extract), " element does not exist in any model.")
         } else {
             ##  Proceed to extraction
             if(length(extract) == 1) {

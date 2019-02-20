@@ -41,7 +41,7 @@ clean.data <- function(data, tree, data.col = FALSE) {
     data_class <- check.class(data, c("matrix", "data.frame"), " must be a data.frame or matrix object.")
     ## if matrix, it must have row names
     if(data_class == "matrix" && is.null(rownames(data))) {
-        stop(paste(match_call$data, "must have row names."))
+        stop(match_call$data, " must have row names.")
     }
 
     ## tree
@@ -56,13 +56,13 @@ clean.data <- function(data, tree, data.col = FALSE) {
         if(data_col_class == "numeric") {
             ## Data.col is numeric
             if(data.col > ncol(data)) {
-                stop(paste("Column", match_call$data.col, "is not present in", match_call$data))
+                stop("Column", match_call$data.col, "is not present in", match_call$data)
             }
         } else {
             ## Data.col is character
             data.col <- match(data.col, colnames(data))
             if(is.na(data.col)) {
-                stop(paste("Column", match_call$data.col, "is not present in", match_call$data))
+                stop("Column ", match_call$data.col, " is not present in ", match_call$data)
             }
         }
     }
@@ -70,7 +70,7 @@ clean.data <- function(data, tree, data.col = FALSE) {
     ## CLEANING THE DATA/TREES
     ## for a single tree
     if(tree_class == "phylo") {
-        
+
         cleaned_data <- clean.tree.table(tree, data, data.col)
 
     } else {

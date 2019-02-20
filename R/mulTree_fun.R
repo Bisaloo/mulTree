@@ -88,7 +88,7 @@ convergence.test <- function(models){
 
     ## Print error messages if convergence didn't run
     if(class(convergence) == "try-error") {
-        warning(paste("Convergence test failed.\nError probably originated from coda::gelman.diag.\n", paste(convergence, collapse = "\n"), sep = ""), call. = FALSE)
+        warning("Convergence test failed.\nError probably originated from coda::gelman.diag.\n", paste(convergence, collapse = "\n"), call. = FALSE)
         convergence <- NULL
     }
 
